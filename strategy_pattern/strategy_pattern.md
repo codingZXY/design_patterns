@@ -6,13 +6,13 @@
 
 假如让你设计一个模拟鸭子的游戏，鸭子的种类繁多，每种鸭子都会游泳和呱呱叫，你会如何设计？我想，大部分人和我一样，首先想到的是使用继承。
 
-![1555421796700](C:\Users\ethan\Pictures\ProcessOn\strategy\模拟鸭子.png)
+![模拟鸭子.png](https://i.loli.net/2019/04/19/5cb8a48cc18d1.png)
 
 这确实是一个不错的设计，使用了标准的OO（面向对象）技术，设计了一个鸭子基类，并让各种鸭子继承它，每种鸭子都会quack和swim，并实现各自的display方法。但是，软件开发有一个不变的真理，就是**改变**。一款软件，无论一开始设计得多好，过一阵子后，都需要迭代和更新。驱动改变的因素有很多，比如功能优化、新功能添加、软件兼容等等。
 
 让我们回到模拟鸭子的游戏，用户觉得不过瘾，还想让鸭子能飞。嘿，能飞还不简单，这样不就行了：
 
-![1555422244371](C:\Users\ethan\Pictures\ProcessOn\strategy\模拟鸭子(1).png)
+![模拟鸭子(1).png](https://i.loli.net/2019/04/19/5cb8a48c87a85.png)
 
 我们忽略了一件事，并非所有鸭子都会飞。假设现在添加一个子类叫RubberDuck(橡皮鸭)，也继承自Duck，就会出现不符合逻辑的情况（会飞的橡皮鸭）。如果在RubberDuck里覆盖掉fly()方法呢？像这样：
 
@@ -34,7 +34,7 @@ class RubberDuck(Duck):
 
 通过上面的例子，我们发现在基类中加上新的行为，会使得某些子类也具有这个不恰当的行为，如果在子类中覆盖该行为，又会导致代码重复且不能复用的情况。针对此情况，《Head First设计模式》给我们提供了解决方案：
 
-![1555592204828](C:\Users\ethan\AppData\Roaming\Typora\typora-user-images\1555592204828.png)
+![1555592204828.png](https://i.loli.net/2019/04/19/5cb8a53dc9e25.png)
 
 从上图中我们看到，飞行和呱呱叫的行为都被抽象成了接口，再定义不同的飞行行为类和呱呱叫行为类来实现这个接口。在Duck基类中定义了两种行为的属性，并增加了performQuack、perfromFly、setFlyBehavior、setQuackBehavior四个方法。这样一来，Duck的子类只要在初始化时声明自己的行为就行了。而且可以调用setFlyBehavior和setQuackBehavior方法来动态改变行为。下面，我们用Python代码实现一下，看看这么做到底能给我们带来什么好处。
 
@@ -192,5 +192,5 @@ I'm flying with a rocket.
 
   （飞行和呱呱叫不是由继承而来，而是和适当的行为对象组合而来，将这些行为委托给行为对象代为处理）
 
-本文所有代码已上传至[Github]()。
+本文所有代码已上传至[Github](<https://github.com/codingZXY/design_patterns/tree/master/strategy_pattern/code>)。
 
